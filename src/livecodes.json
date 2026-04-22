@@ -1,5 +1,5 @@
 {
-  "title": "chay thu",
+  "title": "Untitled Project",
   "description": "",
   "head": "<meta charset=\"UTF-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
   "htmlAttrs": "lang=\"en\" class=\"\"",
@@ -15,7 +15,7 @@
   },
   "script": {
     "language": "javascript",
-    "content": "console.log(\"hung\");\nconsole.log(\"tran\");"
+    "content": "console.log(\"hung\");\nconsole.log(\"tran\");\nconsole.log(\"tran\");"
   },
   "stylesheets": [],
   "scripts": [],
