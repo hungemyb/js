@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quả bóng nảy</title>
+  <style>
+    #my-canvas {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="my-canvas" width="500" height="400"></canvas>
+  <script>
+    (() => {
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('my-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let circles = [];
+        for (let i = 0; i < 10; i++) {
+          let radius = Math.random() * 20 + 8;
+          circles.push({
+            color: `hsl(${Math.floor(Math.random() * 360)},80%,50%)`,
+            x: Math.random() * (canvas.width - 2 * radius) + radius,
+            y: Math.random() * (canvas.height - 2 * radius) + radius,
+            dx: (Math.random() - 0.5) * 4, // tốc độ x, âm dương
+            dy: (Math.random() - 0.5) * 4, // tốc độ y, âm dương
+            radius: radius,
+          });
+        }
+
+        function animation() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          circles.forEach(cir => {
+            ctx.beginPath();
+            ctx.fillStyle = cir.color;
+            ctx.arc(cir.x, cir.y, cir.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            cir.x += cir.dx;
+            cir.y += cir.dy;
+
+            // bóng nảy khi chạm biên
+            if (cir.x + cir.radius >= canvas.width || cir.x - cir.radius <= 0) {
+              cir.dx *= -1;
+            }
+            if (cir.y + cir.radius >= canvas.height || cir.y - cir.radius <= 0) {
+              cir.dy *= -1;
+            }
+          });
+
+          requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+      });
+    })();
+  </script>
+</body>
+</html>
