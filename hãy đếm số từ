@@ -1,0 +1,6 @@
+function getWordCount(sentence){
+if(!sentence) return 0;
+let trimed = sentence.trim();
+if(trimed === "") return 0;
+return sentence.trim().split(/\s+/).length;
+}
