@@ -1,0 +1,44 @@
+function parseShipment(rawData) {
+  const shipment = [];
+  const seen = new Set();
+  for (const record of
+    rawData) {
+    const [sku, name, qty, expires, zone] = record.split("|");
+
+    if(seen.has(sku)){
+      continue;
+    }
+    seen.add(sku);
+
+    shipment.push({
+      sku,
+      name,
+      qty: Number(qty),
+      expires,
+      zone : zone || "general"
+    })
+  }
+  return shipment;
+}
+
+function planRestock(pantry, shipment){
+  const  actions = [];
+  for(const item of shipment){
+    if(item.qty <= 0){
+      actions.push({
+        type :"discard",
+        item
+        });
+    }else{
+       const exists = pantry.some(
+        p  => p.sku === item.sku
+       );
+
+       actions.push({
+        type:exists ?"restock":"donate",
+        item
+       });
+    }
+  }
+  return actions;
+}
